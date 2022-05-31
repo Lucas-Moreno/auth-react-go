@@ -1,3 +1,5 @@
-module github.com/Lucas-Moreno/auth-react-go
+module api
 
 go 1.18
+
+require github.com/google/uuid v1.3.0 // indirect

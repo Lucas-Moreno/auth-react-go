@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    ports: 
+      - 127.0.0.1:5432:5432
+    volumes:
+      - ./migrations/1_create_tables.up.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_DATABASE: postgres
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
