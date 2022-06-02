@@ -36,3 +36,13 @@ func (s *ThreadStore) CreateThread(t api.Thread) error {
 	}
 	return nil
 }
+
+func (s *ThreadStore) UpdateThread(t api.Thread) error {
+	if err := s.Get(&t, `UPDATE threads SET title = $1, description = $2 WHERE id=$3 RETURNING *`, 
+		t.Title,
+		t.Description,
+		t.ID); err != nil {
+		return fmt.Errorf("Error create Thread: %w", err)
+	}
+	return nil
+}
