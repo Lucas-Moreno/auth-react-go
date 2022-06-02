@@ -12,8 +12,11 @@ func NewHandler(store api.Store) *Handler {
 		store: 	store,
 	}
 	h.Use(middleware.Logger)
-	h.Route("/thread/{id}", func(r chi.Router){
+	h.Route("/thread", func(r chi.Router){
 		r.Get("/", h.ThreadList())
+	})
+	h.Route("/thread/{id}", func(r chi.Router){
+		r.Get("/", h.ThreadById())
 	})
 	
 	return h

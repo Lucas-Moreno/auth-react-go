@@ -18,3 +18,11 @@ func (s *ThreadStore) Thread(id uuid.UUID) (api.Thread, error) {
 	}
 	return t, nil
 }
+
+func (s *ThreadStore) Threads() ([]api.Thread, error) {
+	var t []api.Thread
+	if err := s.Select(&t, `SELECT * FROM threads`); err != nil {
+		return []api.Thread{}, fmt.Errorf("Error getting Threads: %w", err)
+	}
+	return t, nil
+}

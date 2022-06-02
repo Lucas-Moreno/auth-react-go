@@ -11,7 +11,27 @@ import (
 
 func (h *Handler) ThreadList() http.HandlerFunc {
 	type data struct {
-		Thread api.Thread
+		Thread []api.Thread
+	} 
+
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+
+		tt, err := h.store.Threads()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		_ = json.NewEncoder(w).Encode(tt)
+
+	}
+}
+
+
+func (h *Handler) ThreadById() http.HandlerFunc {
+	type data struct {
+		Thread []api.Thread
 	} 
 
 	//tmpl := template.Must(template.New("").Parse(threadsListHTML))
