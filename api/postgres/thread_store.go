@@ -26,3 +26,13 @@ func (s *ThreadStore) Threads() ([]api.Thread, error) {
 	}
 	return t, nil
 }
+
+func (s *ThreadStore) CreateThread(t api.Thread) error {
+	if err := s.Get(&t, `INSERT INTO threads VALUES ($1, $2, $3) RETURNING *`, 
+		t.ID,
+		t.Title,
+		t.Description); err != nil {
+		return fmt.Errorf("Error create Thread: %w", err)
+	}
+	return nil
+}

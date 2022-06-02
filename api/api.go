@@ -20,17 +20,17 @@ type Post struct {
 type ThreadStore interface {
 	Thread(id uuid.UUID) (Thread, error)
 	Threads() ([]Thread, error)
-	// CreateThread(t *Thread) error
+	CreateThread(t Thread) error
 	// UpdateThread(t *Thread) error
 	// DeleteThread(id uuid.UUID) error
 }
 
 type PostStore interface {
-	Post(id uuid.UUID) (Post, error)
-	PostsbyThreads(threadId uuid.UUID) ([]Post, error)
-	CreatePost(t *Post) error
-	UpdatePost(t *Post) error
-	DeletePost(id uuid.UUID) error
+	// Post(id uuid.UUID) (Post, error)
+	// PostsbyThreads(threadId uuid.UUID) ([]Post, error)
+	// CreatePost(t *Post) error
+	// UpdatePost(t *Post) error
+	// DeletePost(id uuid.UUID) error
 }
 
 type Store interface {

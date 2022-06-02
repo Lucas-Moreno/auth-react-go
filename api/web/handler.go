@@ -14,6 +14,7 @@ func NewHandler(store api.Store) *Handler {
 	h.Use(middleware.Logger)
 	h.Route("/thread", func(r chi.Router){
 		r.Get("/", h.ThreadList())
+		r.Post("/", h.CreateThread())
 	})
 	h.Route("/thread/{id}", func(r chi.Router){
 		r.Get("/", h.ThreadById())
