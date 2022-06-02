@@ -114,3 +114,27 @@ func (h *Handler) UpdateThread() http.HandlerFunc {
 		})
 	}
 }
+
+func (h *Handler) DeleteThread() http.HandlerFunc {
+	type data struct {
+		Thread api.Thread
+	} 
+
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+
+ 		id, _ := uuid.Parse(chi.URLParam(r, "id"))
+
+		if err := h.store.DeleteThread(id); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		_ = json.NewEncoder(w).Encode(struct{
+			Message string `json:"message"`
+		}{
+			Message: "Thread deleted",
+		})
+
+	}
+}

@@ -22,7 +22,7 @@ type ThreadStore interface {
 	Threads() ([]Thread, error)
 	CreateThread(t Thread) error
 	UpdateThread(t Thread) error
-	// DeleteThread(id uuid.UUID) error
+	DeleteThread(id uuid.UUID) error
 }
 
 type PostStore interface {

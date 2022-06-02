@@ -19,6 +19,7 @@ func NewHandler(store api.Store) *Handler {
 	h.Route("/thread/{id}", func(r chi.Router){
 		r.Get("/", h.ThreadById())
 		r.Patch("/", h.UpdateThread())
+		r.Delete("/", h.DeleteThread())
 	})
 	
 	return h

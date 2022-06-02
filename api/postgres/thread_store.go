@@ -46,3 +46,10 @@ func (s *ThreadStore) UpdateThread(t api.Thread) error {
 	}
 	return nil
 }
+
+func (s *ThreadStore) DeleteThread(id uuid.UUID) error {
+	if _, err := s.Exec(`DELETE FROM threads WHERE id=$1`, id); err != nil {
+		return fmt.Errorf("Error delete Thread: %w", err)
+	}
+	return nil
+}
