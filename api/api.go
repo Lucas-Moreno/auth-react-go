@@ -1,14 +1,13 @@
-package main
+package api
 
 import (
-	"fmt"
 	"github.com/google/uuid"
 )
 
 type Thread struct {
 	ID				uuid.UUID	`db:"id"`
 	Title			string		`db:"title"`
-	Description		string		`db:"Description"`
+	Description		string		`db:"description"`
 }
 
 type Post struct {
@@ -20,10 +19,10 @@ type Post struct {
 
 type ThreadStore interface {
 	Thread(id uuid.UUID) (Thread, error)
-	Threads() ([]Thread, error)
-	CreateThread(t *Thread) error
-	UpdateThread(t *Thread) error
-	DeleteThread(id uuid.UUID) error
+	// Threads() ([]Thread, error)
+	// CreateThread(t *Thread) error
+	// UpdateThread(t *Thread) error
+	// DeleteThread(id uuid.UUID) error
 }
 
 type PostStore interface {
@@ -34,8 +33,8 @@ type PostStore interface {
 	DeletePost(id uuid.UUID) error
 }
 
-
-func main() {
-	fmt.Println("hello world")
+type Store interface {
+	ThreadStore
 }
+
 
