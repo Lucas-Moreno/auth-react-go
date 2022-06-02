@@ -12,6 +12,9 @@ func NewHandler(store api.Store) *Handler {
 		store: 	store,
 	}
 	h.Use(middleware.Logger)
+	h.Route("/signIn", func(r chi.Router){
+		r.Post("/", h.SignUp())
+	})
 	h.Route("/thread", func(r chi.Router){
 		r.Get("/", h.ThreadList())
 		r.Post("/", h.CreateThread())

@@ -17,9 +17,11 @@ func NewStore(dataSourceName string) (*Store, error) {
 
 	return &Store{
 		ThreadStore: &ThreadStore{DB: db},
+		AuthentificationStore: &AuthentificationStore{DB: db},
 	}, nil
 }
 
 type Store struct {
 	*ThreadStore
+	*AuthentificationStore
 }

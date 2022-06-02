@@ -28,10 +28,11 @@ func (s *ThreadStore) Threads() ([]api.Thread, error) {
 }
 
 func (s *ThreadStore) CreateThread(t api.Thread) error {
-	if err := s.Get(&t, `INSERT INTO threads VALUES ($1, $2, $3) RETURNING *`, 
+	if err := s.Get(&t, `INSERT INTO threads VALUES ($1, $2, $3, $4) RETURNING *`, 
 		t.ID,
 		t.Title,
-		t.Description); err != nil {
+		t.Description,
+		t.UserId); err != nil {
 		return fmt.Errorf("Error create Thread: %w", err)
 	}
 	return nil
@@ -42,7 +43,7 @@ func (s *ThreadStore) UpdateThread(t api.Thread) error {
 		t.Title,
 		t.Description,
 		t.ID); err != nil {
-		return fmt.Errorf("Error create Thread: %w", err)
+		return fmt.Errorf("Error update Thread: %w", err)
 	}
 	return nil
 }

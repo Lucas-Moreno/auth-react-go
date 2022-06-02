@@ -8,13 +8,15 @@ type Thread struct {
 	ID				uuid.UUID	`db:"id"`
 	Title			string		`db:"title"`
 	Description		string		`db:"description"`
+	UserId			uuid.UUID	`db:"user_id"`
+
 }
 
-type Post struct {
+type User struct {
 	ID				uuid.UUID	`db:"id"`
-	ThreadId		uuid.UUID	`db:"thread_id"`
-	Title			string		`db:"title"`
-	Content			string		`db:"content"`
+	FirstName		string		`db:"firstname"`
+	LastName		string		`db:"lastname"`
+	Password		string		`db:"password"`
 }
 
 type ThreadStore interface {
@@ -25,16 +27,14 @@ type ThreadStore interface {
 	DeleteThread(id uuid.UUID) error
 }
 
-type PostStore interface {
-	// Post(id uuid.UUID) (Post, error)
-	// PostsbyThreads(threadId uuid.UUID) ([]Post, error)
-	// CreatePost(t *Post) error
-	// UpdatePost(t *Post) error
-	// DeletePost(id uuid.UUID) error
+
+type AuthentificationStore interface {
+	SignUp(t User) error
 }
 
 type Store interface {
 	ThreadStore
+	AuthentificationStore
 }
 
 

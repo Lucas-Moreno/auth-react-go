@@ -66,6 +66,7 @@ func (h *Handler) CreateThread() http.HandlerFunc {
 
 		_ = json.NewDecoder(r.Body).Decode(&i)
 
+		fmt.Println(i)
 		if err := h.store.CreateThread(i); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
